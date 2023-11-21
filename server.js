@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const { clog } = require('./middleware/clog');
 const api = require('./routes/index.js');
 
 const PORT = process.env.PORT || 3001;
@@ -9,7 +8,7 @@ const app = express();
 
 //client -> middlerware (pre-processing before give to the server app.use()) -> server
 // Import custom middleware, "cLog"
-app.use(clog);
+
 
 // Middleware for parsing JSON and urlencoded form data
 // data parser in app.use to parse client data to req.body (object client data object)
@@ -18,6 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // middleware to modulize api routes
 // break down routes into separate files --> allows for expansion
+// api base, first piece
+// http://localhost:3001/api 
+
 app.use('/api', api);
 
 //middleware to make public the homepage url http://localhost:3001
